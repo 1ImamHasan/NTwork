@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="bn">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>নজরুল ট্রেডার্স - ডিজিটাল বিজনেস কার্ড</title>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+        <style>
+            body {
+                font-family: "Hind Siliguri", sans-serif;
+                background-color: #ffffff;
+            }
+            .main-card {
+                width: 100%;
+                max-width: 750px; /* সামান্য বাড়ানো হয়েছে যেন কন্টেন্ট সুন্দর দেখায় */
+                background: #ffffff;
+                border-radius: 20px;
+                box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                display: flex;
+                flex-direction: row;
+                aspect-ratio: 1.8 / 1; /* স্ট্যান্ডার্ড কার্ড রেশিও */
+            }
+            .left-panel {
+                width: 38%;
+                background: #064e3b;
+                color: white;
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: relative;
+                z-index: 10;
+            }
+            .right-panel {
+                width: 62%;
+                padding: 40px 40px 30px 65px;
+                position: relative;
+                background: #ffffff;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            /* সেই সিগনেচার বাঁকা অংশটি */
+            .diagonal-bg {
+                position: absolute;
+                top: 0;
+                left: -30px;
+                width: 60px;
+                height: 100%;
+                background: #064e3b;
+                transform: skewX(-5deg);
+                z-index: 1;
+            }
+            .diagonal-bg2 {
+                position: absolute;
+                top: 0;
+                left: 35px;
+                width: 5px;
+                height: 100%;
+                background: #15803d;
+                transform: skewX(-5deg);
+                z-index: 1;
+            }
+
+            @media (max-width: 640px) {
+                .main-card {
+                    flex-direction: column;
+                    aspect-ratio: auto;
+                }
+                .left-panel,
+                .right-panel {
+                    width: 100%;
+                    padding: 25px;
+                }
+                .diagonal-bg {
+                    display: none;
+                }
+                .diagonal-bg2 {
+                    position: absolute;
+                    top: 3px;
+                    left: 1px;
+                    width: 100%;
+                    height: 4px;
+                    background: #15803d;
+                    z-index: 1;
+                }
+            }
+
+            .loader {
+                border: 2px solid #f3f3f3;
+                border-top: 2px solid #064e3b;
+                border-radius: 50%;
+                width: 16px;
+                height: 16px;
+                animation: spin 1s linear infinite;
+                display: none;
+            }
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+    <body
+        class="flex items-center justify-center min-h-screen p-4 flex-col gap-8"
+    >
+        <div
+            id="download-wrapper"
+            class="p-12 bg-slate-100 inline-block rounded-[28px]"
+        >
+            <div id="card-to-save" class="main-card">
+                <div class="left-panel">
+                    <div>
+                        <div
+                            class="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg mb-6"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-7 w-7 text-green-900"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                />
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                />
+                            </svg>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <p
+                                    class="text-[10px] uppercase tracking-widest text-yellow-400 font-bold mb-1"
+                                >
+                                    যোগাযোগ:
+                                </p>
+                                <div class="space-y-2">
+                                    <div>
+                                        <p
+                                            class="text-[16px] font-bold leading-none"
+                                        >
+                                            01740-54 83 00
+                                        </p>
+                                        <p class="text-[13px] text-green-300">
+                                            নূর ইসলাম
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p
+                                            class="text-[14px] font-bold leading-none"
+                                        >
+                                            01740-54 83 01
+                                        </p>
+                                        <p class="text-[11px] text-green-300">
+                                            শাহজাহান আলী
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p
+                                            class="text-[14px] font-bold leading-none"
+                                        >
+                                            01730-12 53 52
+                                        </p>
+                                        <p class="text-[11px] text-green-300">
+                                            নজরুল ইসলাম
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="mt-4 flex items-center gap-4 border-t border-yellow-400 pt-2"
+                    >
+                        <img
+                            src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=BEGIN:VCARD%0AVERSION:3.0%0AN:Nazrul;Traders%0AFN:Messrs%20Nazrul%20Traders%0AORG:Messrs%20Nazrul%20Traders%0ATEL;TYPE=CELL:01740548300%0ATEL;TYPE=CELL:01730125352%0AEND:VCARD"
+                            class="w-24 h-24 rounded bg-white p-0.5"
+                            alt="QR"
+                        />
+                        <p class="text-[12px] text-green-200 leading-tight">
+                            <span class="text-yellow-200">ঠিকানা:</span>
+                            <br />
+                            কয়ড়া বাজার, মাদারগঞ্জ, জামালপুর।
+                        </p>
+                    </div>
+                </div>
+
+                <div class="right-panel">
+                    <div class="diagonal-bg"></div>
+                    <div class="diagonal-bg2"></div>
+                    <div
+                        class="relative z-10 h-full flex flex-col justify-between"
+                    >
+                        <div>
+                            <p
+                                class="text-green-700 font-bold text-[11px] tracking-[0.2em] mb-1"
+                            >
+                                বিসমিল্লাহির রাহমানির রাহিম
+                            </p>
+                            <h1
+                                class="text-4xl font-black text-slate-800 leading-tight"
+                            >
+                                মেসার্স নজরুল
+                                <span class="text-green-700">ট্রেডার্স</span>
+                            </h1>
+                            <p
+                                class="text-right text-md font-medium text-slate-500 mt-1"
+                            >
+                                প্রোপ্রাইটর: মোঃ নজরুল ইসলাম
+                            </p>
+
+                            <div
+                                class="h-1 w-100% bg-yellow-400 mt-4 mb-6"
+                            ></div>
+
+                            <p class="text-slate-700 text-[15px] mb-4">
+                                এখানে সকল প্রকার
+                                <span class="font-bold text-green-700"
+                                    >কীটনাশক, আগাছানাশক, ছত্রাকনাশক, সার ও
+                                </span>
+                                <span class="font-bold text-red-700">বীজ</span>
+                                খুচরা ও পাইকারী বিক্রয় করা হয়।
+                            </p>
+
+                            <div class="grid grid-cols-2 gap-y-2 gap-x-4">
+                                <div
+                                    class="flex items-center gap-2 text-[12px] text-slate-600"
+                                >
+                                    <span
+                                        class="w-1.5 h-1.5 bg-green-600 rounded-full"
+                                    ></span>
+                                    স্প্রে মেশিন ও পার্টস
+                                </div>
+                                <div
+                                    class="flex items-center gap-2 text-[12px] text-slate-600"
+                                >
+                                    <span
+                                        class="w-1.5 h-1.5 bg-green-600 rounded-full"
+                                    ></span>
+                                    টিউবওয়েল ও পাইপ
+                                </div>
+                                <div
+                                    class="flex items-center gap-2 text-[12px] text-slate-600"
+                                >
+                                    <span
+                                        class="w-1.5 h-1.5 bg-green-600 rounded-full"
+                                    ></span>
+                                    স্যানিটারী ফিটিংস
+                                </div>
+                                <div
+                                    class="flex items-center gap-2 text-[12px] text-slate-600"
+                                >
+                                    <span
+                                        class="w-1.5 h-1.5 bg-green-600 rounded-full"
+                                    ></span>
+                                    রোল পলিথিন ও নেট সহ অন্যান্য
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex justify-between items-end border-t border-slate-100 pt-4"
+                        >
+                            <div class="text-[9px] text-slate-400">
+                                সর্বোত্তম সেবাই আমাদের লক্ষ্য
+                            </div>
+                            <div
+                                class="text-[10px] font-bold text-green-800 bg-green-50 px-3 py-1 rounded-full border border-green-100 uppercase tracking-tighter"
+                            >
+                                Established 1998
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button
+            id="downloadBtn"
+            class="flex items-center gap-3 bg-slate-900 hover:bg-black text-white px-8 py-3.5 rounded-full font-semibold transition-all hover:scale-105 active:scale-95 shadow-lg"
+        >
+            <div class="loader" id="loader"></div>
+            <span>ডাউনলোড কার্ড (PNG)</span>
+        </button>
+
+        <script>
+            document
+                .getElementById("downloadBtn")
+                .addEventListener("click", async function () {
+                    const card = document.getElementById("download-wrapper");
+                    const btn = this;
+                    const loader = document.getElementById("loader");
+
+                    loader.style.display = "block";
+                    btn.style.opacity = "0.7";
+                    btn.disabled = true;
+
+                    try {
+                        const canvas = await html2canvas(card, {
+                            scale: 4, // হাই রেজোলিউশনের জন্য ৪ গুণ বাড়ানো হয়েছে
+                            useCORS: true,
+                            backgroundColor: "#ffffff",
+                            logging: false,
+                            letterRendering: true
+                        });
+
+                        const link = document.createElement("a");
+                        link.download = "Nazrul-Traders-Card.png";
+                        link.href = canvas.toDataURL("image/png", 1.0);
+                        link.click();
+                    } catch (error) {
+                        console.error(error);
+                        alert("কার্ডটি সেভ করতে সমস্যা হয়েছে।");
+                    } finally {
+                        loader.style.display = "none";
+                        btn.style.opacity = "1";
+                        btn.disabled = false;
+                    }
+                });
+        </script>
+    </body>
+</html>
