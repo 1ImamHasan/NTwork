@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মেসার্স নজরুল ট্রেডার্স | প্রিমিয়াম কৃষি ও স্যানিটারি সমাধান</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Hind Siliguri', sans-serif; }
+        .bg-dark-green { background-color: #052e16; }
+        .text-gold { color: #fbbf24; }
+        .gradient-overlay { background: linear-gradient(to bottom, rgba(5,46,22,0.8), rgba(5,46,22,1)); }
+        
+        /* কাস্টম বাটন অ্যানিমেশন */
+        .btn-hover { transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .btn-hover:after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 100%;
+            background: rgba(255,255,255,0.1); transition: all 0.3s ease; z-index: -1;
+        }
+        .btn-hover:hover:after { width: 100%; }
+
+        /* শাইন ইফেক্ট */
+        .shine { position: relative; overflow: hidden; }
+        .shine::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+            transform: skewX(-25deg); transition: 0.75s;
+        }
+        .shine:hover::before { left: 125%; }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <div class="bg-dark-green text-white py-2 px-4 text-sm hidden md:block">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex gap-6">
+                <span><i class="fa-solid fa-location-dot text-gold mr-2"></i>কয়ড়া বাজার, মাদারগঞ্জ</span>
+                <span><i class="fa-solid fa-clock text-gold mr-2"></i>প্রতিদিন সকাল ৮টা - রাত ৯টা</span>
+            </div>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-gold"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="hover:text-gold"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="sticky top-0 z-50 bg-white shadow-lg border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-dark-green rounded-xl shadow-inner">
+                    <i class="fa-solid fa-seedling text-gold text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black text-dark-green leading-none">নজরুল ট্রেডার্স</h1>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold mt-1">Trust & Quality since 1998</p>
+                </div>
+            </div>
+            <div class="hidden lg:flex items-center gap-10 font-bold text-gray-700">
+                <a href="#home" class="hover:text-green-800 transition">হোম</a>
+                <a href="#about" class="hover:text-green-800 transition">আমাদের পরিচিতি</a>
+                <a href="#products" class="hover:text-green-800 transition">পণ্যসমূহ</a>
+                <a href="#brands" class="hover:text-green-800 transition">ব্র্যান্ডস</a>
+                <a href="#contact" class="bg-dark-green text-white px-8 py-3 rounded-full btn-hover">যোগাযোগ করুন</a>
+            </div>
+            <button class="lg:hidden text-dark-green text-2xl"><i class="fa-solid fa-bars-staggered"></i></button>
+        </div>
+    </nav>
+
+    <section id="home" class="relative min-h-[85vh] flex items-center overflow-hidden bg-dark-green">
+        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070" class="absolute inset-0 w-full h-full object-cover opacity-40" alt="Farmer">
+        <div class="absolute inset-0 gradient-overlay"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-gold mb-6 font-semibold">
+                    <span class="flex h-2 w-2 rounded-full bg-gold animate-ping"></span>
+                    জামালপুরের সেরা কৃষি ও স্যানিটারি স্টোর
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-8 leading-[1.1]">
+                    উন্নত কৃষি মানেই <br><span class="text-gold">মেসার্স নজরুল</span> ট্রেডার্স
+                </h1>
+                <p class="text-xl text-gray-300 mb-10 max-w-lg leading-relaxed">
+                    আমরা শুধু পণ্য বিক্রি করি না, আমরা কৃষকের স্বপ্নকে সফল করতে সঠিক পরামর্শ ও উন্নত মানের কৃষি সরঞ্জাম নিশ্চিত করি।
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="#products" class="shine bg-gold text-dark-green px-10 py-5 rounded-2xl font-black text-lg text-center shadow-2xl">পণ্য তালিকা দেখুন <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                    <a href="tel:01730125352" class="bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-sm text-white px-10 py-5 rounded-2xl font-black text-lg text-center">সরাসরি কল দিন</a>
+                </div>
+            </div>
+            
+            <div class="hidden lg:block" data-aos="fade-left">
+                <div class="bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[40px] shadow-2xl">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="p-6 bg-white/10 rounded-3xl text-center">
+                            <i class="fa-solid fa-shield-check text-gold text-4xl mb-4"></i>
+                            <h4 class="text-white font-bold text-lg">১০০% গ্যারান্টি</h4>
+                            <p class="text-gray-400 text-sm">সকল আসল পণ্য</p>
+                        </div>
+                        <div class="p-6 bg-white/10 rounded-3xl text-center">
+                            <i class="fa-solid fa-truck-fast text-gold text-4xl mb-4"></i>
+                            <h4 class="text-white font-bold text-lg">দ্রুত সেবা</h4>
+                            <p class="text-gray-400 text-sm">মাদারগঞ্জ এলাকায়</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="brands" class="py-12 bg-white border-b overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="text-center text-gray-400 font-bold uppercase text-xs tracking-widest mb-8">আমাদের গর্বিত পার্টনার ব্র্যান্ডসমূহ</p>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all">
+                <span class="text-2xl font-black text-slate-400 italic">SYNGENTA</span>
+                <span class="text-2xl font-black text-slate-400 italic">BAYER</span>
+                <span class="text-2xl font-black text-slate-400 italic">LAL TEER</span>
+                <span class="text-2xl font-black text-slate-400 italic">ACI AGRI</span>
+                <span class="text-2xl font-black text-slate-400 italic">AUTO CROP</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="py-24 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div data-aos="fade-right">
+                    <span class="text-green-700 font-bold uppercase tracking-widest text-sm">আমাদের সেবা</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-dark-green mt-2">আমরা যা যা সরবরাহ করি</h2>
+                </div>
+                <p class="text-gray-500 max-w-md" data-aos="fade-left">দীর্ঘ ২ যুগের অভিজ্ঞতা থেকে আমরা আপনার প্রয়োজনীয়তা অনুযায়ী সেরা মালামাল বাছাই করে রাখি।</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group bg-white p-2 rounded-[32px] shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100" data-aos="fade-up">
+                    <div class="relative h-64 overflow-hidden rounded-[24px]">
+                        <img src="https://images.unsplash.com/photo-1595841696677-54897f292c4b?q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Seeds">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-xs font-black text-green-800 uppercase tracking-tighter shadow-sm">প্রিমিয়াম কোয়ালিটি</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-dark-green mb-3">কীটনাশক ও হাইব্রিড বীজ</h3>
+                        <p class="text-gray-600 mb-6 text-sm">ফলন বাড়াতে এবং পোকা দমনে সেরা ব্র্যান্ডের ওষুধ ও ১০০% অঙ্কুরোদগমক্ষম বীজ।</p>
+                        <div class="flex justify-between items-center border-t pt-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase">উপলভ্য: স্টকে আছে</span>
+                            <a href="https://wa.me/01730125352" class="text-green-700 font-bold flex items-center text-sm group-hover:underline">বিস্তারিত <i class="fa-solid fa-chevron-right ml-2 text-[10px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-white p-2 rounded-[32px] shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative h-64 overflow-hidden rounded-[24px]">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Sanitary">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-xs font-black text-blue-800 uppercase tracking-tighter shadow-sm">দীর্ঘস্থায়ী হার্ডওয়্যার</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-dark-green mb-3">স্যানিটারী ও ফিটিংস</h3>
+                        <p class="text-gray-600 mb-6 text-sm">বাসা-বাড়ি ও কৃষি কাজের জন্য উন্নত মানের টিউবওয়েল, পাইপ এবং টেকসই বাথরুম ফিটিংস।</p>
+                        <div class="flex justify-between items-center border-t pt-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase">উপলভ্য: স্টকে আছে</span>
+                            <a href="https://wa.me/01730125352" class="text-green-700 font-bold flex items-center text-sm group-hover:underline">বিস্তারিত <i class="fa-solid fa-chevron-right ml-2 text-[10px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-white p-2 rounded-[32px] shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative h-64 overflow-hidden rounded-[24px]">
+                        <img src="https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Sprayer">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-xs font-black text-orange-800 uppercase tracking-tighter shadow-sm">আধুনিক যন্ত্রপাতি</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-dark-green mb-3">ব্যাটারি স্প্রে মেশিন</h3>
+                        <p class="text-gray-600 mb-6 text-sm">অটোমেটিক ব্যাটারি চালিত স্প্রে মেশিন এবং সকল খুচরা যন্ত্রাংশ গ্যারান্টি সহ পাওয়া যায়।</p>
+                        <div class="flex justify-between items-center border-t pt-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase">উপলভ্য: স্টকে আছে</span>
+                            <a href="https://wa.me/01730125352" class="text-green-700 font-bold flex items-center text-sm group-hover:underline">বিস্তারিত <i class="fa-solid fa-chevron-right ml-2 text-[10px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-dark-green relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-gold opacity-5 blur-[120px] rounded-full"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <i class="fa-solid fa-quote-left text-gold text-5xl mb-8 opacity-40"></i>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-10 italic leading-relaxed">
+                "নজরুল ট্রেডার্সের পরামর্শ ও ওষুধের কারণে এ বছর আমার ধানের ফলন অনেক ভালো হয়েছে। তাদের ব্যবহারের মান খুবই চমৎকার।"
+            </h2>
+            <div class="flex items-center justify-center gap-4">
+                <div class="w-16 h-16 bg-gold/20 rounded-full border-2 border-gold flex items-center justify-center">
+                    <i class="fa-solid fa-user text-gold text-2xl"></i>
+                </div>
+                <div class="text-left">
+                    <p class="text-white font-bold text-xl leading-none">মোঃ আব্দুল করিম</p>
+                    <p class="text-gold text-sm mt-1">সফল কৃষক, মাদারগঞ্জ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-white rounded-[40px] shadow-2xl overflow-hidden flex flex-col lg:flex-row-reverse border border-gray-100">
+                <div class="lg:w-1/2 p-10 md:p-20 bg-slate-50">
+                    <h2 class="text-3xl font-black text-dark-green mb-4">যেকোনো প্রয়োজনে যোগাযোগ করুন</h2>
+                    <p class="text-gray-500 mb-10">পণ্য সম্পর্কে বিস্তারিত জানতে বা পরামর্শের জন্য আমাদের সরাসরি কল দিন অথবা দোকানে চলে আসুন।</p>
+                    
+                    <div class="grid gap-8">
+                        <div class="flex gap-6 group">
+                            <div class="w-14 h-14 bg-white shadow-md rounded-2xl flex items-center justify-center text-green-700 text-xl group-hover:bg-green-700 group-hover:text-white transition-all"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <p class="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">কল করুন</p>
+                                <a href="tel:01730125352" class="text-xl font-bold text-dark-green block hover:text-green-700">01730-12 53 52</a>
+                                <a href="tel:01740548300" class="text-xl font-bold text-dark-green block hover:text-green-700">01740-54 83 00</a>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 group">
+                            <div class="w-14 h-14 bg-white shadow-md rounded-2xl flex items-center justify-center text-green-700 text-xl group-hover:bg-green-700 group-hover:text-white transition-all"><i class="fa-solid fa-map-location-dot"></i></div>
+                            <div>
+                                <p class="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">ঠিকানা</p>
+                                <p class="text-xl font-bold text-dark-green leading-relaxed">কয়ড়া বাজার, মাদারগঞ্জ, জামালপুর।</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 group">
+                            <div class="w-14 h-14 bg-white shadow-md rounded-2xl flex items-center justify-center text-green-700 text-xl group-hover:bg-green-700 group-hover:text-white transition-all"><i class="fa-brands fa-whatsapp"></i></div>
+                            <div>
+                                <p class="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">হোয়াটসঅ্যাপ</p>
+                                <a href="https://wa.me/01730125352" class="text-xl font-bold text-dark-green hover:text-green-700">চ্যাট শুরু করুন</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 bg-gray-200 relative">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14500.0000000000!2d89.7500!3d24.8800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fdf7d000000001%3A0x0000000000000000!2sMadarganj!5e0!3m2!1sen!2sbd!4v1700000000000" 
+                        class="w-full h-full min-h-[450px] border-0" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark-green text-white py-20 px-4 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fa-solid fa-seedling text-gold text-3xl"></i>
+                        <h2 class="text-3xl font-black tracking-tight">নজরুল ট্রেডার্স</h2>
+                    </div>
+                    <p class="text-gray-400 max-w-sm mb-6 leading-relaxed italic">
+                        "কৃষকের মুখে হাসি থাকলে, হাসবে বাংলাদেশ।" আমরা মাদারগঞ্জের প্রতিটি কৃষকের ঘরে ঘরে সেরা উপকরণ পৌঁছে দিতে অঙ্গীকারবদ্ধ।
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-gold hover:text-dark-green transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-gold hover:text-dark-green transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-gold">দ্রুত লিংক</h4>
+                    <ul class="space-y-3 text-gray-400 font-medium">
+                        <li><a href="#home" class="hover:text-white">হোম</a></li>
+                        <li><a href="#about" class="hover:text-white">আমাদের সম্পর্কে</a></li>
+                        <li><a href="#products" class="hover:text-white">পণ্যসমূহ</a></li>
+                        <li><a href="#contact" class="hover:text-white">যোগাযোগ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-gold">সেবা সমূহ</h4>
+                    <ul class="space-y-3 text-gray-400 font-medium">
+                        <li>কীটনাশক পরামর্শ</li>
+                        <li>সঠিক বীজ নির্বাচন</li>
+                        <li>স্যানিটারি ফিটিংস গাইড</li>
+                        <li>কৃষি যন্ত্রপাতি মেরামত</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/5 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
+                <p>© ২০২৬ মেসার্স নজরুল ট্রেডার্স। সর্বস্বত্ব সংরক্ষিত।</p>
+                <p>Designed for excellence in agriculture.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
+</body>
+</html>
