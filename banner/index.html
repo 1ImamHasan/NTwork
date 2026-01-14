@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="bn">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>নজরুল ট্রেডার্স - দোকান ব্যানার</title>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+        <style>
+            body {
+                font-family: "Hind Siliguri", sans-serif;
+                background-color: #f1f5f9;
+            }
+            /* ব্যানারের সাইজ ১০ ফুট x ৩ ফুট অনুপাতে (10:3 Ratio) */
+            .banner-container {
+                width: 1200px;
+                height: 360px;
+                background: #ffffff;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                display: flex;
+            }
+
+            /* বাম পাশের সবুজ অংশ (কার্ডের সাথে মিল রেখে) */
+            .left-section {
+                width: 25%;
+                background: #064e3b;
+                height: 100%;
+                position: relative;
+                z-index: 10;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: 40px;
+                color: white;
+            }
+
+            /* সেই বাঁকা ডিজাইন এলিমেন্ট */
+            .diagonal-shape {
+                position: absolute;
+                top: 0;
+                right: -60px;
+                width: 120px;
+                height: 100%;
+                background: #064e3b;
+                transform: skewX(-12deg);
+                z-index: 1;
+                border-right: 8px solid #facc15; /* হলুদ বর্ডার */
+            }
+
+            .right-section {
+                flex: 1;
+                padding: 20px 40px 20px 100px; /* বামে জায়গা রাখা হয়েছে বাঁকা অংশের জন্য */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: relative;
+                background-image: radial-gradient(#f0fdf4 1px, transparent 1px);
+                background-size: 20px 20px;
+            }
+            
+            /* টেক্সট শ্যাডো */
+            .text-shadow {
+                text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            }
+        </style>
+    </head>
+    <body class="flex flex-col items-center justify-center min-h-screen p-8 gap-8">
+        
+        <div id="banner-wrapper" class="p-4 bg-white rounded-xl">
+            <div id="banner-to-save" class="banner-container">
+                
+                <div class="left-section">
+                    <div class="diagonal-shape"></div> <div class="relative z-10 space-y-6">
+                        <p class="text-yellow-400 text-sm tracking-widest font-semibold">বিসমিল্লাহির রাহমানির রাহিম</p>
+                        
+                        <div>
+                            <p class="text-green-200 text-sm mb-1">প্রোপ্রাইটর:</p>
+                            <h3 class="text-2xl font-bold leading-none text-white">মোঃ নজরুল ইসলাম</h3>
+                        </div>
+
+                        <div class="mt-4 pt-4 border-t border-green-700">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="bg-yellow-400 p-1.5 rounded text-green-900">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-xl font-bold font-mono">01740-54 83 00</p>
+                                    <p class="text-xl font-bold font-mono">01730-12 53 52</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    
+                    <div class="text-center mt-2">
+                        <h1 class="text-[85px] font-black text-slate-800 leading-tight tracking-tight text-shadow">
+                            মেসার্স নজরুল <span class="text-[#064e3b]">ট্রেডার্স</span>
+                        </h1>
+                        <div class="inline-block bg-yellow-400 px-6 py-1 transform -skew-x-12 mt-2">
+                            <p class="text-green-900 font-bold text-lg transform skew-x-12 tracking-wide">
+                                কৃষি পণ্য ও স্যানিটারী সামগ্রীর বিশ্বস্ত প্রতিষ্ঠান
+                            </p>
+                         </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-6 px-4">
+                        <div class="text-center w-1/4 border-r-2 border-slate-100">
+                            <p class="text-red-600 font-bold text-3xl mb-1">বীজ</p>
+                            <span class="text-slate-500 text-sm">উন্নত মানের</span>
+                        </div>
+                        <div class="text-center w-1/4 border-r-2 border-slate-100">
+                            <p class="text-[#064e3b] font-bold text-3xl mb-1">কীটনাশক</p>
+                            <span class="text-slate-500 text-sm">ও আগাছানাশক</span>
+                        </div>
+                        <div class="text-center w-1/4 border-r-2 border-slate-100">
+                            <p class="text-[#064e3b] font-bold text-3xl mb-1">সার</p>
+                            <span class="text-slate-500 text-sm">দেশি ও বিদেশি</span>
+                        </div>
+                        <div class="text-center w-1/4">
+                            <p class="text-slate-700 font-bold text-2xl mb-1 leading-6">স্যানিটারী</p>
+                            <span class="text-slate-500 text-sm">ও টিউবওয়েল</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto bg-[#064e3b] text-white py-3 px-8 rounded-full flex justify-between items-center mx-4 mb-2 shadow-lg">
+                        <div class="flex items-center gap-2">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                              </svg>
+                            <p class="text-xl font-medium">কয়ড়া বাজার, মাদারগঞ্জ, জামালপুর।</p>
+                        </div>
+                        <div class="text-yellow-400 font-bold text-lg border-l border-green-600 pl-4">
+                            স্থাপিত: ১৯৯৮
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <button
+            id="downloadBtn"
+            class="flex items-center gap-3 bg-green-900 hover:bg-green-800 text-white px-10 py-4 rounded-lg font-bold text-lg transition-all hover:scale-105 shadow-xl border-b-4 border-green-950"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <span>ব্যানার ডাউনলোড করুন (High Quality)</span>
+        </button>
+
+        <script>
+            document.getElementById("downloadBtn").addEventListener("click", async function () {
+                const banner = document.getElementById("banner-to-save");
+                const btn = this;
+                
+                btn.innerHTML = "প্রসেসিং হচ্ছে...";
+                btn.style.opacity = "0.7";
+                btn.disabled = true;
+
+                try {
+                    // বড় প্রিন্টের জন্য স্কেল বাড়ানো হয়েছে (Scale 3 = 300% size)
+                    const canvas = await html2canvas(banner, {
+                        scale: 3, 
+                        useCORS: true,
+                        backgroundColor: "#ffffff",
+                    });
+
+                    const link = document.createElement("a");
+                    link.download = "Nazrul-Traders-Shop-Banner.png";
+                    link.href = canvas.toDataURL("image/png", 1.0);
+                    link.click();
+                } catch (error) {
+                    console.error(error);
+                    alert("সমস্যা হয়েছে, আবার চেষ্টা করুন।");
+                } finally {
+                    btn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        <span>ব্যানার ডাউনলোড করুন (High Quality)</span>`;
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+                }
+            });
+        </script>
+    </body>
+</html>
