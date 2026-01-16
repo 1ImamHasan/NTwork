@@ -268,6 +268,22 @@
             section {
                 overflow-x: hidden;
             }
+
+            /* একটিভ লিঙ্কের স্টাইল */
+.nav-active {
+    color: #fbbf24 !important; /* গোল্ড কালার */
+    position: relative;
+}
+
+.nav-active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fbbf24;
+}
         </style>
     </head>
 
@@ -1085,7 +1101,7 @@
         <!-- Back to top -->
         <button
             id="backToTop"
-            class="fixed bottom-8 right-6 bg-gold text-dark-green w-14 h-14 rounded-full shadow-2xl translate-y-24 opacity-0 transition-all duration-500 z-50 flex items-center justify-center hover:bg-white"
+            class="fixed bottom-28 right-6 bg-gold text-dark-green w-14 h-14 rounded-full shadow-2xl translate-y-24 opacity-0 transition-all duration-500 z-50 flex items-center justify-center hover:bg-white"
             aria-label="Back to top"
         >
             <i class="fa-solid fa-arrow-up text-xl" aria-hidden="true"></i>
@@ -1098,7 +1114,7 @@
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp - জানতে যোগাযোগ করুন"
-            class="fixed bottom-28 right-6 z-50 flex items-center gap-3 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-transform"
+            class="fixed bottom-8 right-6 z-50 flex items-center gap-3 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-transform"
         >
             <i class="fa-brands fa-whatsapp text-2xl" aria-hidden="true"></i>
             <span class="hidden sm:inline font-bold">WhatsApp করুন</span>
@@ -1533,21 +1549,43 @@
                     });
                 });
             });
-            
-            
-            
-            
-            
+
+
+
+
+
             // মোবাইল মেনুর লিঙ্কগুলোতে ক্লিক করলে মেনু বন্ধ হয়ে যাবে
 document.querySelectorAll('#mobile-menu a').forEach(link => {
     link.addEventListener('click', () => {
         const mobileMenu = document.getElementById("mobile-menu");
         const menuBtn = document.getElementById("menu-toggle");
-        
+
         mobileMenu.classList.add("hidden"); // মেনু লুকিয়ে ফেলবে
         menuBtn.setAttribute("aria-expanded", "false"); // এক্সেসিবিলিটি আপডেট
     });
 });
+
+
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll("nav a[href^='#']");
+
+function activeMenu() {
+    let scrollY = window.pageYOffset;
+
+    sections.forEach(current => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - 100; // কিছুটা অফসেট রাখা হয়েছে
+        const sectionId = current.getAttribute("id");
+
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            document.querySelector("nav a[href*=" + sectionId + "]")?.classList.add("nav-active");
+        } else {
+            document.querySelector("nav a[href*=" + sectionId + "]")?.classList.remove("nav-active");
+        }
+    });
+}
+
+window.addEventListener("scroll", activeMenu);
 
         </script>
 
