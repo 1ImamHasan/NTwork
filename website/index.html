@@ -1533,6 +1533,22 @@
                     });
                 });
             });
+            
+            
+            
+            
+            
+            // মোবাইল মেনুর লিঙ্কগুলোতে ক্লিক করলে মেনু বন্ধ হয়ে যাবে
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        const mobileMenu = document.getElementById("mobile-menu");
+        const menuBtn = document.getElementById("menu-toggle");
+        
+        mobileMenu.classList.add("hidden"); // মেনু লুকিয়ে ফেলবে
+        menuBtn.setAttribute("aria-expanded", "false"); // এক্সেসিবিলিটি আপডেট
+    });
+});
+
         </script>
 
         <!-- Optional: small GA4 snippet (replace MEASUREMENT_ID with your actual ID) -->
