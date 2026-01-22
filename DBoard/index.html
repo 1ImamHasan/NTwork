@@ -1,260 +1,631 @@
 <!doctype html>
 <html lang="bn">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>নজরুল ট্রেডার্স - স্মার্ট ডিসপ্লে ২.০</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>নজরুল ট্রেডার্স - স্মার্ট ডিসপ্লে ৩.০</title>
 
-    <style>
-        body { font-family: "Hind Siliguri", sans-serif; overflow: hidden; }
-        
-        /* এনিমেশনসমূহ */
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .animate-fade { animation: fadeIn 0.8s ease-in forwards; }
-        .animate-content { animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-        /* স্লাইড কন্ট্রোল */
-        .slide-content { display: none; height: 100%; }
-        .slide-content.active { display: flex; flex-direction: column; justify-content: center; }
+        <style>
+            body {
+                font-family: "Hind Siliguri", sans-serif;
+                overflow: hidden;
+            }
 
-        /* প্রিমিয়াম প্রগ্রেস বার */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 6px;
-            background: linear-gradient(to right, #facc15, #fbbf24);
-            width: 0%;
-            z-index: 100;
-            box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
-        }
+            /* এনিমেশনসমূহ */
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(40px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+            @keyframes pulse-soft {
+                0%,
+                100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.05);
+                }
+            }
 
-        /* গ্লাস কার্ড ইফেক্ট */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-        }
+            .animate-fade {
+                animation: fadeIn 0.9s ease-in forwards;
+            }
+            .animate-content {
+                animation: slideInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            .animate-pulse-soft {
+                animation: pulse-soft 6s infinite ease-in-out;
+            }
 
-        /* মারকিউ লুপ */
-        @keyframes marquee {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-        .marquee-wrapper {
-            display: flex;
-            width: max-content;
-            animation: marquee 25s linear infinite;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 h-screen w-screen flex flex-col">
+            /* স্লাইড কন্ট্রোল */
+            .slide-content {
+                display: none;
+                height: 100%;
+                width: 100%;
+            }
+            .slide-content.active {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
 
-    <div id="progress" class="progress-bar"></div>
+            /* প্রিমিয়াম প্রগ্রেস বার */
+            .progress-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 4px;
+                background: linear-gradient(to right, #facc15, #fbbf24);
+                width: 0%;
+                z-index: 100;
+                box-shadow: 0 0 15px rgba(250, 204, 21, 0.8);
+            }
 
-    <div class="flex-grow flex flex-col lg:flex-row w-full h-full relative overflow-hidden">
-        
-        <aside class="w-full lg:w-[32%] bg-[#064e3b] text-white flex flex-col justify-between relative p-6 lg:p-10 shadow-2xl z-20">
-            <div class="absolute -right-16 top-0 w-32 h-full bg-[#047857] transform -skew-x-6 z-0 hidden lg:block"></div>
-            
-            <div class="relative z-10 text-center">
-                <div class="w-20 h-20 lg:w-28 lg:h-28 bg-white rounded-3xl mx-auto flex items-center justify-center mb-6 shadow-2xl transform rotate-3">
-                    <i class="ph-fill ph-plant text-5xl lg:text-6xl text-green-700"></i>
-                </div>
-                <h1 class="text-3xl lg:text-5xl font-black leading-tight tracking-tight">
-                    মেসার্স<br><span class="text-yellow-400 drop-shadow-md">নজরুল</span> ট্রেডার্স
-                </h1>
-                <div class="mt-4 inline-block bg-yellow-400 text-green-900 px-4 py-1 rounded-full text-sm font-bold tracking-widest uppercase shadow-lg">
-                    Est. 1995
-                </div>
-                <div class="h-1.5 w-20 bg-yellow-400 mx-auto mt-6 rounded-full"></div>
-            </div>
+            /* গ্লাস কার্ড ইফেক্ট */
+            .glass-card {
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.6);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+            }
+            .glass-card:hover {
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            }
 
-            <div class="relative z-10 space-y-4 mt-8 lg:mt-0">
-                <div class="flex items-center gap-4 bg-white/10 p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all">
-                    <div class="bg-yellow-400 p-3 rounded-xl shadow-inner">
-                        <i class="ph-fill ph-phone-call text-green-900 text-2xl"></i>
+            /* মারকিউ লুপ */
+            @keyframes marquee {
+                from {
+                    transform: translateX(0);
+                }
+                to {
+                    transform: translateX(-50%);
+                }
+            }
+            .marquee-wrapper {
+                display: flex;
+                width: max-content;
+                animation: marquee 60s linear infinite;
+            }
+
+            /* গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড এনিমেশন */
+            .bg-animated {
+                background: linear-gradient(
+                    -45deg,
+                    #f0fdf4,
+                    #ecfccb,
+                    #f0f9ff,
+                    #f0fdf4
+                );
+                background-size: 400% 400%;
+                animation: gradientBG 15s ease infinite;
+            }
+            @keyframes gradientBG {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+        </style>
+    </head>
+    <body class="bg-slate-50 h-screen w-screen flex flex-col">
+        <div id="progress" class="progress-bar"></div>
+
+        <div
+            class="flex-grow flex flex-col lg:flex-row w-full h-full relative overflow-hidden"
+        >
+            <aside
+                class="w-full lg:w-[30%] bg-[#064e3b] text-white flex flex-col justify-between relative p-6 lg:p-8 shadow-2xl z-20"
+            >
+                <div class="relative z-10 text-center mt-4">
+                    <div
+                        class="w-24 h-24 lg:w-32 lg:h-32 bg-white rounded-full mx-auto flex items-center justify-center mb-6 shadow-2xl transform hover:rotate-12 transition-transform duration-500 border-4 border-yellow-400"
+                    >
+                        <i
+                            class="ph-fill ph-plant text-6xl lg:text-7xl text-green-700"
+                        ></i>
                     </div>
-                    <div>
-                        <p class="text-xs text-green-200 font-bold uppercase tracking-wider">নূর ইসলাম</p>
-                        <p class="text-xl font-black">01740-54 83 00</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-4 bg-white/10 p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all">
-                    <div class="bg-yellow-400 p-3 rounded-xl shadow-inner">
-                        <i class="ph-fill ph-phone-call text-green-900 text-2xl"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs text-green-200 font-bold uppercase tracking-wider">নজরুল ইসলাম</p>
-                        <p class="text-xl font-black">01730-12 53 52</p>
-                    </div>
-                </div>
-                
-                <div class="hidden lg:block bg-white p-3 rounded-2xl mt-6 w-36 mx-auto shadow-2xl">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=NazrulTraders" class="w-full h-auto" alt="QR">
-                    <p class="text-green-900 text-[10px] text-center font-bold mt-2">স্ক্যান করুন</p>
-                </div>
-            </div>
-        </aside>
 
-        <main class="w-full lg:w-[68%] relative bg-gradient-to-br from-slate-50 to-green-50 p-6 lg:p-16 flex items-center justify-center">
-            
-            <div id="slide-1" class="slide-content active">
-                <div class="text-center animate-content w-full">
-                    <p class="text-xl lg:text-3xl text-green-600 font-bold mb-4 bg-green-100 inline-block px-6 py-2 rounded-full">আপনাকে স্বাগতম</p>
-                    <h2 class="text-5xl lg:text-8xl font-black text-slate-800 mb-8 leading-tight">কৃষি সেবায় <br><span class="text-green-600 border-b-8 border-yellow-400">বিশ্বস্ত</span> নাম</h2>
-                    <p class="text-lg lg:text-2xl text-slate-500 max-w-3xl mx-auto leading-relaxed">আমরা দিচ্ছি আসল পন্যের নিশ্চয়তা। আপনার ফসলের সুরক্ষায় আমরা সবসময় পাশে আছি।</p>
-                    
-                    <div class="mt-12 flex flex-wrap justify-center gap-6">
-                        <div class="glass-card p-6 rounded-3xl w-44 lg:w-56 text-center transform hover:scale-105 transition-all">
-                            <i class="ph-fill ph-shield-check text-6xl text-green-600 mb-4"></i>
-                            <h3 class="font-black text-slate-700 text-xl uppercase">আসল পণ্য</h3>
+                    <div class="pb-4">
+                        <h1
+                            class="text-4xl lg:text-[2.625rem]-5xl font-black leading-tight tracking-tight drop-shadow-lg whitespace-nowrap"
+                        >
+                            মেসার্স <span class="text-yellow-400">নজরুল</span>
+                            ট্রেডার্স
+                        </h1>
+                        <p
+                            class="text-[10px] text-right uppercase tracking-[0.2em] text-yellow-600 font-bold mt-1"
+                        >
+                            Trust & Quality since 1995
+                        </p>
+                        <p
+                            class="text-[18px] text-right text-white-200 font-bold mt-1"
+                        >
+                            প্রো: মোঃ নজরুল ইসলাম
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative z-10 space-y-3 mb-4 p-2">
+                    <div
+                        class="flex items-center gap-4 bg-white/10 p-3 lg:p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all cursor-pointer"
+                    >
+                        <div class="bg-yellow-400 p-3 rounded-full shadow-lg">
+                            <i
+                                class="ph-fill ph-phone-call text-green-900 text-xl"
+                            ></i>
                         </div>
-                        <div class="glass-card p-6 rounded-3xl w-44 lg:w-56 text-center transform hover:scale-105 transition-all">
-                            <i class="ph-fill ph-hand-coins text-6xl text-yellow-500 mb-4"></i>
-                            <h3 class="font-black text-slate-700 text-xl uppercase">ন্যায্য মূল্য</h3>
+                        <div>
+                            <p
+                                class="text-[12px] text-green-200 font-bold uppercase tracking-wider"
+                            >
+                                নূর ইসলাম
+                            </p>
+                            <p
+                                class="text-xl lg:text-2xl font-black tracking-wide"
+                            >
+                                ০১৭৪০-৫৪ ৮৩ ০০
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-center gap-4 bg-white/10 p-3 lg:p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all cursor-pointer"
+                    >
+                        <div class="bg-yellow-400 p-3 rounded-full shadow-lg">
+                            <i
+                                class="ph-fill ph-phone-call text-green-900 text-xl"
+                            ></i>
+                        </div>
+                        <div>
+                            <p
+                                class="text-[12px] text-green-200 font-bold uppercase tracking-wider"
+                            >
+                                শাহজাহান আলী
+                            </p>
+                            <p
+                                class="text-xl lg:text-2xl font-black tracking-wide"
+                            >
+                                ০১৭৪০-৫৪ ৮৩ ০১
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex items-center gap-4 bg-white/10 p-3 lg:p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all cursor-pointer"
+                    >
+                        <div class="bg-yellow-400 p-3 rounded-full shadow-lg">
+                            <i
+                                class="ph-fill ph-phone-call text-green-900 text-xl"
+                            ></i>
+                        </div>
+                        <div>
+                            <p
+                                class="text-[12px] text-green-200 font-bold uppercase tracking-wider"
+                            >
+                                নজরুল ইসলাম
+                            </p>
+                            <p
+                                class="text-xl lg:text-2xl font-black tracking-wide"
+                            >
+                                ০১৭৩০-১২ ৫৩ ৫২
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </aside>
 
-            <div id="slide-2" class="slide-content w-full">
-                <div class="animate-content">
-                    <h2 class="text-4xl lg:text-6xl font-black text-slate-800 mb-10 border-l-8 border-yellow-400 pl-6">আমাদের পণ্যসমূহ</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 w-full">
-                        <div class="glass-card p-8 rounded-3xl flex items-center gap-6 group">
-                            <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center text-5xl transition-transform group-hover:scale-110">🌱</div>
-                            <div>
-                                <h3 class="text-2xl lg:text-3xl font-black text-green-800">উন্নত বীজ</h3>
-                                <p class="text-slate-500 font-medium">দেশি ও বিদেশি হাইব্রিড বীজ</p>
+            <main
+                class="w-full lg:w-[70%] relative bg-animated p-12 lg:p-14 flex items-center justify-center"
+            >
+                <div
+                    class="absolute top-4 right-4 z-30 bg-green-700 p-2 px-4 rounded-xl shadow-[0_0_20px_rgba(250,204,21,0.4)] border-2 border-white/50 text-green-900 font-black text-xs animate-pulse-soft"
+                >
+                    <div
+                        id="clock-time"
+                        class="text-4xl font-black text-yellow-300 font-mono tracking-wider"
+                    >
+                        00:00:00
+                    </div>
+                    <div
+                        id="clock-date"
+                        class="text-sm text-green-100 font-medium mt-1 border-t border-white/20 pt-1"
+                    >
+                        শনিবার, ১ জানুয়ারি ২০২৬
+                    </div>
+                </div>
+
+                <div id="slide-1" class="slide-content active">
+                    <div class="text-center animate-content w-full max-w-5xl">
+                        <div
+                            class="inline-flex items-center gap-2 text-xl lg:text-2xl text-green-700 font-bold mb-6 bg-white/60 px-8 py-3 rounded-full shadow-sm border border-green-200"
+                        >
+                            আসসালামু আলাইকুম
+                        </div>
+
+                        <h2
+                            class="text-5xl lg:text-7xl font-black text-slate-800 mb-6 leading-tight"
+                        >
+                            কৃষি সেবায় <br />
+                            <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-800"
+                                >৩০ বছরের</span
+                            >
+                            বিশ্বস্ততা
+                        </h2>
+
+                        <p
+                            class="text-xl lg:text-3xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-medium"
+                        >
+                            আমরা দিচ্ছি
+                            <span class="text-red-600 font-bold">১০০% আসল</span>
+                            পন্যের নিশ্চয়তা। <br />আপনার ফসলের সুরক্ষায় আমরা
+                            সবসময় পাশে আছি।
+                        </p>
+
+                        <div class="mt-12 flex flex-wrap justify-center gap-8">
+                            <div
+                                class="glass-card p-8 rounded-[2rem] w-52 lg:w-64 text-center transform hover:-translate-y-2 transition-all border-b-4 border-green-500"
+                            >
+                                <i
+                                    class="ph-duotone ph-seal-check text-7xl text-green-600 mb-4"
+                                ></i>
+                                <h3 class="font-black text-slate-700 text-2xl">
+                                    আসল পণ্য
+                                </h3>
+                            </div>
+                            <div
+                                class="glass-card p-8 rounded-[2rem] w-52 lg:w-64 text-center transform hover:-translate-y-2 transition-all border-b-4 border-yellow-500"
+                            >
+                                <i
+                                    class="ph-duotone ph-hand-coins text-7xl text-yellow-600 mb-4"
+                                ></i>
+                                <h3 class="font-black text-slate-700 text-2xl">
+                                    ন্যায্য মূল্য
+                                </h3>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="glass-card p-8 rounded-3xl flex items-center gap-6 group">
-                            <div class="w-20 h-20 bg-red-100 rounded-2xl flex items-center justify-center text-5xl transition-transform group-hover:scale-110">☠️</div>
-                            <div>
-                                <h3 class="text-2xl lg:text-3xl font-black text-red-800">কীটনাশক</h3>
-                                <p class="text-slate-500 font-medium">পোকামাকড় দমনে কার্যকরী</p>
+                <div id="slide-2" class="slide-content">
+                    <div class="animate-content w-full max-w-6xl">
+                        <h2
+                            class="text-4xl lg:text-6xl font-black text-slate-800 mb-12 border-l-[12px] border-yellow-400 pl-8"
+                        >
+                            আমাদের <span class="text-green-700">পণ্যসমূহ</span>
+                        </h2>
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full"
+                        >
+                            <div
+                                class="glass-card p-6 lg:p-8 rounded-3xl flex items-center gap-6 group hover:bg-green-50 transition-colors"
+                            >
+                                <div
+                                    class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center text-5xl shadow-inner group-hover:scale-110 transition-transform duration-300"
+                                >
+                                    🌱
+                                </div>
+                                <div>
+                                    <h3
+                                        class="text-2xl lg:text-3xl font-black text-green-800"
+                                    >
+                                        উন্নত বীজ
+                                    </h3>
+                                    <p
+                                        class="text-slate-600 font-medium text-lg"
+                                    >
+                                        দেশি ও বিদেশি হাইব্রিড বীজ
+                                    </p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="glass-card p-8 rounded-3xl flex items-center gap-6 group">
-                            <div class="w-20 h-20 bg-yellow-100 rounded-2xl flex items-center justify-center text-5xl transition-transform group-hover:scale-110">🌾</div>
-                            <div>
-                                <h3 class="text-2xl lg:text-3xl font-black text-yellow-700">রাসায়নিক সার</h3>
-                                <p class="text-slate-500 font-medium">ইউরিয়া, পটাশ, ডিএপি</p>
+                            <div
+                                class="glass-card p-6 lg:p-8 rounded-3xl flex items-center gap-6 group hover:bg-red-50 transition-colors"
+                            >
+                                <div
+                                    class="w-20 h-20 bg-red-100 rounded-2xl flex items-center justify-center text-5xl shadow-inner group-hover:scale-110 transition-transform duration-300"
+                                >
+                                    🐞
+                                </div>
+                                <div>
+                                    <h3
+                                        class="text-2xl lg:text-3xl font-black text-red-700"
+                                    >
+                                        কীটনাশক
+                                    </h3>
+                                    <p
+                                        class="text-slate-600 font-medium text-lg"
+                                    >
+                                        পোকামাকড় দমনে সেরা সমাধান
+                                    </p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="glass-card p-8 rounded-3xl flex items-center gap-6 group">
-                            <div class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center text-5xl transition-transform group-hover:scale-110">💧</div>
-                            <div>
-                                <h3 class="text-2xl lg:text-3xl font-black text-blue-800">ছত্রাকনাশক</h3>
-                                <p class="text-slate-500 font-medium">ফসলের পচন রোধে সেরা</p>
+                            <div
+                                class="glass-card p-6 lg:p-8 rounded-3xl flex items-center gap-6 group hover:bg-yellow-50 transition-colors"
+                            >
+                                <div
+                                    class="w-20 h-20 bg-yellow-100 rounded-2xl flex items-center justify-center text-5xl shadow-inner group-hover:scale-110 transition-transform duration-300"
+                                >
+                                    🌾
+                                </div>
+                                <div>
+                                    <h3
+                                        class="text-2xl lg:text-3xl font-black text-yellow-700"
+                                    >
+                                        রাসায়নিক সার
+                                    </h3>
+                                    <p
+                                        class="text-slate-600 font-medium text-lg"
+                                    >
+                                        ইউরিয়া, পটাশ, ডিএপি, জিপসাম
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div
+                                class="glass-card p-6 lg:p-8 rounded-3xl flex items-center gap-6 group hover:bg-blue-50 transition-colors"
+                            >
+                                <div
+                                    class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center text-5xl shadow-inner group-hover:scale-110 transition-transform duration-300"
+                                >
+                                    💧
+                                </div>
+                                <div>
+                                    <h3
+                                        class="text-2xl lg:text-3xl font-black text-blue-800"
+                                    >
+                                        ছত্রাকনাশক
+                                    </h3>
+                                    <p
+                                        class="text-slate-600 font-medium text-lg"
+                                    >
+                                        ফসলের পচন ও দাগ রোধে
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="slide-3" class="slide-content w-full">
-                <div class="flex flex-col items-center animate-content text-center">
-                    <div class="w-24 h-24 bg-slate-800 text-white rounded-3xl flex items-center justify-center text-5xl mb-8 shadow-2xl transform rotate-6">🛠️</div>
-                    <h2 class="text-5xl lg:text-7xl font-black text-slate-800 mb-4 leading-tight">হার্ডওয়্যার কর্নার</h2>
-                    <p class="text-xl lg:text-3xl text-slate-500 mb-12 font-medium">কৃষি যন্ত্রাংশ ও স্যানিটারী সামগ্রী</p>
+                <div id="slide-3" class="slide-content">
+                    <div
+                        class="flex flex-col items-center animate-content text-center w-full max-w-5xl"
+                    >
+                        <div
+                            class="w-28 h-28 bg-slate-800 text-white rounded-3xl flex items-center justify-center text-6xl mb-6 shadow-2xl transform rotate-3 ring-8 ring-slate-200"
+                        >
+                            🛠️
+                        </div>
+                        <h2
+                            class="text-5xl lg:text-7xl font-black text-slate-800 mb-4 leading-tight"
+                        >
+                            হার্ডওয়্যার কর্নার
+                        </h2>
+                        <p
+                            class="text-xl lg:text-3xl text-slate-500 mb-12 font-medium bg-white px-6 py-2 rounded-full shadow-sm"
+                        >
+                            কৃষি যন্ত্রাংশ ও স্যানিটারী সামগ্রীর সমাহার
+                        </p>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-4xl">
-                        <div class="bg-white p-5 lg:p-6 rounded-2xl shadow-md border-l-8 border-green-600 flex justify-between items-center transform hover:-translate-y-1 transition-all">
-                            <span class="text-xl lg:text-2xl font-bold text-slate-700 italic">স্প্রে মেশিন ও পার্টস</span>
-                            <i class="ph-bold ph-check-circle text-green-600 text-3xl"></i>
-                        </div>
-                        <div class="bg-white p-5 lg:p-6 rounded-2xl shadow-md border-l-8 border-green-600 flex justify-between items-center transform hover:-translate-y-1 transition-all">
-                            <span class="text-xl lg:text-2xl font-bold text-slate-700 italic">টিউবওয়েল ও পাইপ</span>
-                            <i class="ph-bold ph-check-circle text-green-600 text-3xl"></i>
-                        </div>
-                        <div class="bg-white p-5 lg:p-6 rounded-2xl shadow-md border-l-8 border-green-600 flex justify-between items-center transform hover:-translate-y-1 transition-all">
-                            <span class="text-xl lg:text-2xl font-bold text-slate-700 italic">স্যানিটারী ফিটিংস</span>
-                            <i class="ph-bold ph-check-circle text-green-600 text-3xl"></i>
-                        </div>
-                        <div class="bg-white p-5 lg:p-6 rounded-2xl shadow-md border-l-8 border-green-600 flex justify-between items-center transform hover:-translate-y-1 transition-all">
-                            <span class="text-xl lg:text-2xl font-bold text-slate-700 italic">রোল পলিথিন ও নেট</span>
-                            <i class="ph-bold ph-check-circle text-green-600 text-3xl"></i>
+                        <div
+                            class="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full"
+                        >
+                            <div
+                                class="bg-white p-5 lg:p-7 rounded-2xl shadow-lg border-l-8 border-green-600 flex justify-between items-center transform hover:scale-[1.02] transition-all"
+                            >
+                                <span
+                                    class="text-xl lg:text-2xl font-bold text-slate-700"
+                                    >স্প্রে মেশিন ও পার্টস</span
+                                >
+                                <i
+                                    class="ph-fill ph-check-circle text-green-600 text-3xl"
+                                ></i>
+                            </div>
+                            <div
+                                class="bg-white p-5 lg:p-7 rounded-2xl shadow-lg border-l-8 border-green-600 flex justify-between items-center transform hover:scale-[1.02] transition-all"
+                            >
+                                <span
+                                    class="text-xl lg:text-2xl font-bold text-slate-700"
+                                    >টিউবওয়েল ও পাইপ</span
+                                >
+                                <i
+                                    class="ph-fill ph-check-circle text-green-600 text-3xl"
+                                ></i>
+                            </div>
+                            <div
+                                class="bg-white p-5 lg:p-7 rounded-2xl shadow-lg border-l-8 border-green-600 flex justify-between items-center transform hover:scale-[1.02] transition-all"
+                            >
+                                <span
+                                    class="text-xl lg:text-2xl font-bold text-slate-700"
+                                    >স্যানিটারী ফিটিংস</span
+                                >
+                                <i
+                                    class="ph-fill ph-check-circle text-green-600 text-3xl"
+                                ></i>
+                            </div>
+                            <div
+                                class="bg-white p-5 lg:p-7 rounded-2xl shadow-lg border-l-8 border-green-600 flex justify-between items-center transform hover:scale-[1.02] transition-all"
+                            >
+                                <span
+                                    class="text-xl lg:text-2xl font-bold text-slate-700"
+                                    >রোল পলিথিন ও নেট</span
+                                >
+                                <i
+                                    class="ph-fill ph-check-circle text-green-600 text-3xl"
+                                ></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </main>
-    </div>
-
-    <footer class="bg-slate-900 text-white py-4 overflow-hidden relative z-50 border-t-4 border-yellow-400 shadow-[0_-10px_20px_rgba(0,0,0,0.2)]">
-        <div class="marquee-wrapper">
-            <div class="flex items-center text-xl lg:text-3xl font-bold space-x-20 px-10">
-                <span class="text-yellow-400 flex items-center gap-3"><i class="ph-fill ph-map-pin"></i> ঠিকান: কয়ড়া বাজার, মাদারগঞ্জ, জামালপুর।</span>
-                <span class="flex items-center gap-3"><i class="ph-fill ph-user"></i> প্রোপ্রাইটর: মোঃ নজরুল ইসলাম</span>
-                <span class="text-green-400 flex items-center gap-3"><i class="ph-fill ph-check-circle"></i> এখানে পাইকারি ও খুচরা বিক্রয় করা হয়।</span>
-                <span class="text-white flex items-center gap-3"><i class="ph-fill ph-phone-call"></i> যেকোনো প্রয়োজনে: ০১৭৪০-৫৪ ৮৩ ০০</span>
-            </div>
-            <div class="flex items-center text-xl lg:text-3xl font-bold space-x-20 px-10">
-                <span class="text-yellow-400 flex items-center gap-3"><i class="ph-fill ph-map-pin"></i> ঠিকান: কয়ড়া বাজার, মাদারগঞ্জ, জামালপুর।</span>
-                <span class="flex items-center gap-3"><i class="ph-fill ph-user"></i> প্রোপ্রাইটর: মোঃ নজরুল ইসলাম</span>
-                <span class="text-green-400 flex items-center gap-3"><i class="ph-fill ph-check-circle"></i> এখানে পাইকারি ও খুচরা বিক্রয় করা হয়।</span>
-                <span class="text-white flex items-center gap-3"><i class="ph-fill ph-phone-call"></i> যেকোনো প্রয়োজনে: ০১৭৪০-৫৪ ৮৩ ০০</span>
-            </div>
+            </main>
         </div>
-    </footer>
 
-    <script>
-        // কনফিগারেশন
-        const slideDuration = 8000; // ৮ সেকেন্ড প্রতি স্লাইড (টিভিতে পড়ার জন্য একটু বেশি সময় দেওয়া হলো)
-        let currentSlide = 1;
-        const totalSlides = 3;
-        const progressBar = document.getElementById('progress');
-        
-        function startProgress() {
-            progressBar.style.transition = 'none';
-            progressBar.style.width = '0%';
-            setTimeout(() => {
-                progressBar.style.transition = `width ${slideDuration}ms linear`;
-                progressBar.style.width = '100%';
-            }, 50);
-        }
+        <footer
+            class="bg-slate-900 text-white py-4 overflow-hidden relative z-50 border-t-4 border-yellow-400 shadow-[0_-10px_20px_rgba(0,0,0,0.2)]"
+        >
+            <div class="marquee-wrapper">
+                <div
+                    class="flex items-center text-xl lg:text-2xl font-bold space-x-16 px-8 whitespace-nowrap"
+                >
+                    <span class="text-yellow-400 flex items-center gap-3"
+                        ><i class="ph-fill ph-map-pin"></i> ঠিকানা: কয়ড়া
+                        বাজার, মাদারগঞ্জ, জামালপুর।</span
+                    >
+                    <span class="flex items-center gap-3 text-slate-200"
+                        ><i class="ph-fill ph-user-circle"></i> প্রোপ্রাইটর: মোঃ
+                        নজরুল ইসলাম</span
+                    >
+                    <span class="text-green-400 flex items-center gap-3"
+                        ><i class="ph-fill ph-seal-check"></i> আপনাদের আস্থার
+                        ঠিকানায় আমরা দিচ্ছি বীজ, কীটনাশক, সার, স্যানিটারি পণ্য,
+                        স্প্রে মেশিন ও রোল পলিথিন।</span
+                    >
+                    <span class="text-white flex items-center gap-3"
+                        ><i class="ph-fill ph-phone-call"></i> যেকোনো প্রয়োজনে:
+                        ০১৭৪০-৫৪ ৮৩ ০০, ০১৭৪০-৫৪ ৮৩ ০১, ০১৭৩০-১২ ৫৩ ৫২</span
+                    >
+                </div>
+                <div
+                    class="flex items-center text-xl lg:text-2xl font-bold space-x-16 px-8 whitespace-nowrap"
+                >
+                    <span class="text-yellow-400 flex items-center gap-3"
+                        ><i class="ph-fill ph-map-pin"></i> ঠিকানা: কয়ড়া
+                        বাজার, মাদারগঞ্জ, জামালপুর।</span
+                    >
+                    <span class="flex items-center gap-3 text-slate-200"
+                        ><i class="ph-fill ph-user-circle"></i> প্রোপ্রাইটর: মোঃ
+                        নজরুল ইসলাম</span
+                    >
+                    <span class="text-green-400 flex items-center gap-3"
+                        ><i class="ph-fill ph-seal-check"></i> আপনাদের আস্থার
+                        ঠিকানায় আমরা দিচ্ছি বীজ, কীটনাশক, সার, স্যানিটারি পণ্য,
+                        স্প্রে মেশিন ও রোল পলিথিন।</span
+                    >
+                    <span class="text-white flex items-center gap-3"
+                        ><i class="ph-fill ph-phone-call"></i> যেকোনো প্রয়োজনে:
+                        ০১৭৪০-৫৪ ৮৩ ০০, ০১৭৪০-৫৪ ৮৩ ০১, ০১৭৩০-১২ ৫৩ ৫২</span
+                    >
+                </div>
+            </div>
+        </footer>
 
-        function nextSlide() {
-            const currentElement = document.getElementById(`slide-${currentSlide}`);
-            currentElement.classList.remove('active');
-            
-            currentSlide = (currentSlide % totalSlides) + 1;
-            
-            const nextElement = document.getElementById(`slide-${currentSlide}`);
-            nextElement.classList.add('active');
-            
-            // রিলোড এনিমেশন
-            nextElement.style.animation = 'none';
-            nextElement.offsetHeight; 
-            nextElement.style.animation = null;
+        <script>
+            // কনফিগারেশন
+            const slideDuration = 10000;
+            let currentSlide = 1;
+            const totalSlides = 3;
+            const progressBar = document.getElementById("progress");
 
+            // ঘড়ি আপডেট ফাংশন (যোগ করা হয়েছে)
+            function updateClock() {
+                const now = new Date();
+
+                // সময়
+                let hours = now.getHours();
+                const ampm = hours >= 12 ? "PM" : "AM";
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                const minutes = now.getMinutes().toString().padStart(2, "0");
+                const seconds = now.getSeconds().toString().padStart(2, "0");
+
+                const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
+
+                // বাংলা তারিখ
+                const options = {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                };
+                const dateString = now.toLocaleDateString("bn-BD", options);
+
+                // সংখ্যা বাংলায় রূপান্তর
+                const toBengali = str =>
+                    str.replace(/[0-9]/g, d => "০১২৩৪৫৬৭৮৯"[d]);
+
+                const timeElement = document.getElementById("clock-time");
+                const dateElement = document.getElementById("clock-date");
+
+                if (timeElement) timeElement.innerText = toBengali(timeString);
+                if (dateElement) dateElement.innerText = dateString;
+            }
+
+            // প্রগ্রেস বার এনিমেশন
+            function startProgress() {
+                progressBar.style.transition = "none";
+                progressBar.style.width = "0%";
+                setTimeout(() => {
+                    progressBar.style.transition = `width ${slideDuration}ms linear`;
+                    progressBar.style.width = "100%";
+                }, 50);
+            }
+
+            // স্লাইড পরিবর্তন
+            function nextSlide() {
+                const currentElement = document.getElementById(
+                    `slide-${currentSlide}`
+                );
+                if (currentElement) currentElement.classList.remove("active");
+
+                currentSlide = (currentSlide % totalSlides) + 1;
+
+                const nextElement = document.getElementById(
+                    `slide-${currentSlide}`
+                );
+                if (nextElement) {
+                    nextElement.classList.add("active");
+
+                    // রি-ট্রিগার এনিমেশন
+                    nextElement.style.animation = "none";
+                    nextElement.offsetHeight;
+                    nextElement.style.animation = null;
+
+                    const content =
+                        nextElement.querySelector(".animate-content");
+                    if (content) {
+                        content.style.animation = "none";
+                        content.offsetHeight;
+                        content.style.animation = null;
+                    }
+                }
+
+                startProgress();
+            }
+
+            // শুরু করা
+            setInterval(updateClock, 1000);
+            updateClock();
             startProgress();
-        }
-
-        // শুরু করা
-        startProgress();
-        setInterval(nextSlide, slideDuration);
-    </script>
-</body>
+            setInterval(nextSlide, slideDuration);
+        </script>
+    </body>
 </html>
