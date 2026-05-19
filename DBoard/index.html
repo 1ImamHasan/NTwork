@@ -61,15 +61,13 @@
 
             /* স্লাইড কন্ট্রোল */
             .slide-content {
-                display: none;
-                height: 100%;
-                width: 100%;
-            }
-            .slide-content.active {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                position: absolute;
+                height: 100%;
+                width: 100%;
             }
 
             /* প্রিমিয়াম প্রগ্রেস বার */
@@ -164,6 +162,41 @@
                 100% {
                     background-position: 0% 50%;
                 }
+            }
+
+
+            /* স্লাইড ফেড ট্রানজিশন */
+            .slide-content {
+                opacity: 0;
+                transition: opacity 0.7s ease;
+                pointer-events: none;
+            }
+            .slide-content.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /* ডট ইন্ডিকেটর */
+            #slide-dots {
+                position: fixed;
+                bottom: 4.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 10px;
+                z-index: 200;
+            }
+            .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: rgba(0,0,0,0.25);
+                transition: background 0.4s, transform 0.4s;
+                cursor: pointer;
+            }
+            .dot.active {
+                background: #16a34a;
+                transform: scale(1.4);
             }
 
             /* Footer adjustments for responsiveness */
@@ -288,7 +321,7 @@
             </aside>
 
             <main
-                class="w-full lg:w-[70%] relative bg-animated p-6 sm:p-10 lg:p-14 flex items-center justify-center overflow-auto"
+                class="w-full lg:w-[70%] relative bg-animated p-6 sm:p-10 lg:p-14 flex items-center justify-center overflow-auto" style="position:relative;"
             >
                 <!-- small-screen clock (normal flow) -->
                 <div class="block lg:hidden mb-4 w-full">
@@ -925,6 +958,35 @@
                         </div>
                     </div>
                 </div>
+                <div id="slide-qr" class="slide-content w-full">
+                    <div class="animate-content w-full max-w-3xl text-center">
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 mb-6">
+                            সরাসরি <span class="text-green-700">কল করুন</span>
+                        </h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div class="glass-card p-6 rounded-2xl text-center border-b-4 border-green-500">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=tel:01740548300" class="mx-auto mb-3 rounded-xl shadow" alt="QR নূর ইসলাম"/>
+                                <p class="font-black text-slate-700 text-lg">নূর ইসলাম</p>
+                                <p class="text-green-700 font-bold">০১৭৪০-৫৪ ৮৩ ০০</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-2xl text-center border-b-4 border-yellow-500">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=tel:01740548301" class="mx-auto mb-3 rounded-xl shadow" alt="QR শাহজাহান"/>
+                                <p class="font-black text-slate-700 text-lg">শাহজাহান আলী</p>
+                                <p class="text-yellow-700 font-bold">০১৭৪০-৫৪ ৮৩ ০১</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-2xl text-center border-b-4 border-blue-500">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=tel:01730125352" class="mx-auto mb-3 rounded-xl shadow" alt="QR নজরুল"/>
+                                <p class="font-black text-slate-700 text-lg">নজরুল ইসলাম</p>
+                                <p class="text-blue-700 font-bold">০১৭৩০-১২ ৫৩ ৫২</p>
+                            </div>
+                        </div>
+                        <p class="mt-6 text-slate-500 font-medium text-lg">QR কোড স্ক্যান করে সরাসরি কল করুন</p>
+                    </div>
+                </div>
+
+                <!-- Slide Dots -->
+                <div id="slide-dots"></div>
+
                 <button
                     onclick="toggleFullScreen()"
                     class="fixed top-6 right-6 z-[100] bg-white/80 backdrop-blur-md p-3 rounded-full shadow-lg border border-white/50 hover:bg-yellow-400 hover:scale-110 transition-all duration-300 group"
@@ -942,56 +1004,22 @@
             class="bg-slate-900 text-white pt-3 pb-3 overflow-hidden relative z-50 border-t-4 border-yellow-400 shadow-[0_-10px_20px_rgba(0,0,0,0.2)] flex items-center"
         >
             <div class="marquee-area flex-1">
-                <div class="marquee-wrapper">
-                    <div
-                        class="flex items-center text-sm sm:text-lg font-bold space-x-10 px-6 whitespace-nowrap"
-                    >
-                        <span class="text-yellow-400 flex items-center gap-2"
-                            ><i class="ph-fill ph-map-pin"></i> ঠিকানা: কয়ড়া
-                            বাজার, মাদারগঞ্জ, জামালপুর।</span
-                        >
-                        <span class="flex items-center gap-2 text-slate-200"
-                            ><i class="ph-fill ph-user-circle"></i> প্রোপ্রাইটর:
-                            মোঃ নজরুল ইসলাম</span
-                        >
-                        <span class="text-green-400 flex items-center gap-2"
-                            ><i class="ph-fill ph-seal-check"></i> আপনাদের
-                            আস্থার ঠিকানায় আমরা দিচ্ছি বীজ, কীটনাশক, সার,
-                            স্যানিটারি পণ্য, স্প্রে মেশিন ও রোল পলিথিন।</span
-                        >
-                        <span class="text-white flex items-center gap-2"
-                            ><i class="ph-fill ph-phone-call"></i> যেকোনো
-                            প্রয়োজনে: ০১৭৪০-৫৪ ৮৩ ০০, ০১৭৪০-৫৪ ৮৩ ০১, ০১৭৩০-১২
-                            ৫৩ ৫২</span
-                        >
-                    </div>
-
-                    <!-- duplicate for continuous loop -->
-                    <div
-                        class="flex items-center text-sm sm:text-lg font-bold space-x-10 px-6 whitespace-nowrap"
-                    >
-                        <span class="text-yellow-400 flex items-center gap-2"
-                            ><i class="ph-fill ph-map-pin"></i> ঠিকানা: কয়���়া
-                            বাজার, মাদারগঞ্জ, জামালপুর।</span
-                        >
-                        <span class="flex items-center gap-2 text-slate-200"
-                            ><i class="ph-fill ph-user-circle"></i> প্রোপ্রাইটর:
-                            মোঃ নজরুল ইসলাম</span
-                        >
-                        <span class="text-green-400 flex items-center gap-2"
-                            ><i class="ph-fill ph-seal-check"></i> আপনাদের
-                            আস্থার ঠিকানায় আমরা দিচ্ছি বীজ, কীটনাশক, সার,
-                            স্যানিটারি পণ্য, স্প্রে মেশিন ও রোল পলিথিন।</span
-                        >
-                        <span class="text-white flex items-center gap-2"
-                            ><i class="ph-fill ph-phone-call"></i> যেকোনো
-                            প্রয়োজনে: ০১৭৪০-৫৪ ৮৩ ০০, ০১৭৪০-৫৪ ৮৩ ০১, ০১৭৩০-১২
-                            ৫৩ ৫২</span
-                        >
-                    </div>
-                </div>
-            </div>
-
+                <div class="marquee-wrapper" id="marquee-wrapper"></div>
+                <script>
+                    const items = [
+                        {cls:'text-yellow-400', icon:'ph-map-pin', text:' ঠিকানা: কয়ড়া বাজার, মাদারগঞ্জ, জামালপুর।'},
+                        {cls:'text-slate-200', icon:'ph-user-circle', text:' প্রোপ্রাইটর: মোঃ নজরুল ইসলাম'},
+                        {cls:'text-green-400', icon:'ph-seal-check', text:' আপনাদের আস্থার ঠিকানায় আমরা দিচ্ছি বীজ, কীটনাশক, সার, স্যানিটারি পণ্য, স্প্রে মেশিন ও রোল পলিথিন।'},
+                        {cls:'text-white', icon:'ph-phone-call', text:' যেকোনো প্রয়োজনে: ০১৭৪০-৫৪ ৮৩ ০০, ০১৭৪০-৫৪ ৮৩ ০১, ০১৭৩০-১২ ৫৩ ৫২'},
+                    ];
+                    const wrapper = document.getElementById('marquee-wrapper');
+                    [1,2].forEach(() => {
+                        const div = document.createElement('div');
+                        div.className = 'flex items-center text-sm sm:text-lg font-bold space-x-10 px-6 whitespace-nowrap';
+                        div.innerHTML = items.map(i => `<span class="${i.cls} flex items-center gap-2"><i class="ph-fill ${i.icon}"></i>${i.text}</span>`).join('');
+                        wrapper.appendChild(div);
+                    });
+                </script>
             <div
                 class="hidden lg:flex items-center px-4 border-l-4 border-yellow-400"
             >
@@ -1128,6 +1156,7 @@
                 currentSlideIndex = (currentSlideIndex + 1) % slides.length;
 
                 slides[currentSlideIndex].classList.add("active");
+                updateDots();
 
                 // retrigger animation on content
                 const content =
