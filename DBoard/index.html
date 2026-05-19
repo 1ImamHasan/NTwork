@@ -59,7 +59,7 @@
                 animation: pulse-soft 6s infinite ease-in-out;
             }
 
-            /* স্লাইড কন্ট্রোল */
+            /* স্লাইড কন্ট্রোল + ফেড ট্রানজিশন */
             .slide-content {
                 display: flex;
                 flex-direction: column;
@@ -72,6 +72,18 @@
                 padding: 1rem;
                 overflow-y: auto;
                 box-sizing: border-box;
+                opacity: 0;
+                transition: opacity 0.7s ease;
+                pointer-events: none;
+            }
+            .slide-content.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            @media (max-width: 1023px) {
+                .slides-wrapper {
+                    min-height: 70vh;
+                }
             }
 
             /* প্রিমিয়াম প্রগ্রেস বার */
@@ -169,22 +181,7 @@
             }
 
 
-            /* স্লাইড ফেড ট্রানজিশন */
-            .slide-content {
-                opacity: 0;
-                transition: opacity 0.7s ease;
-                pointer-events: none;
-            }
-            .slide-content.active {
-                opacity: 1;
-                pointer-events: auto;
-            }
-            /* Mobile: slide area needs fixed height */
-            @media (max-width: 1023px) {
-                .slides-wrapper {
-                    min-height: 70vh;
-                }
-            }
+
 
             /* ডট ইন্ডিকেটর */
             #slide-dots {
@@ -241,18 +238,18 @@
             <aside
                 class="w-full lg:w-[30%] bg-[#064e3b] text-white flex flex-col lg:flex-col justify-between relative p-4 sm:p-6 lg:p-8 shadow-2xl z-20"
             >
-                <div class="relative z-10 text-center mt-4">
+                <div class="relative z-10 text-center mt-2 lg:mt-4">
                     <div
-                        class="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-white rounded-full mx-auto flex items-center justify-center mb-6 shadow-2xl transform hover:rotate-12 transition-transform duration-500 border-4 border-yellow-400"
+                        class="w-14 h-14 sm:w-20 sm:h-20 lg:w-32 lg:h-32 bg-white rounded-full mx-auto flex items-center justify-center mb-3 lg:mb-6 shadow-2xl transform hover:rotate-12 transition-transform duration-500 border-4 border-yellow-400"
                     >
                         <i
-                            class="ph-fill ph-plant text-5xl sm:text-6xl lg:text-7xl text-green-700"
+                            class="ph-fill ph-plant text-3xl sm:text-5xl lg:text-7xl text-green-700"
                         ></i>
                     </div>
 
                     <div class="pb-4 pr-0 sm:pr-6">
                         <h1
-                            class="text-3xl sm:text-4xl lg:text-[2.625rem] font-black leading-tight tracking-tight drop-shadow-lg"
+                            class="text-xl sm:text-3xl lg:text-[2.625rem] font-black leading-tight tracking-tight drop-shadow-lg"
                         >
                             মেসার্স <span class="text-yellow-400">নজরুল</span>
                             ট্রেডার্স
@@ -272,7 +269,7 @@
 
                 <div class="relative z-10 space-y-3 mb-4 p-2">
                     <div
-                        class="flex items-center gap-4 bg-white/10 p-3 sm:p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all cursor-pointer"
+                        class="flex items-center gap-3 bg-white/10 p-2 sm:p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all cursor-pointer"
                     >
                         <div class="bg-yellow-400 p-3 rounded-full shadow-lg">
                             <i
@@ -285,15 +282,11 @@
                             >
                                 নূর ইসলাম
                             </p>
-                            <p
-                                class="text-lg sm:text-xl font-black tracking-wide"
-                            >
-                                ০১৭৪০-৫৪ ৮৩ ০০
-                            </p>
+                            <a href="tel:01740548300" class="text-lg sm:text-xl font-black tracking-wide hover:text-yellow-300 transition-colors block">০১৭৪০-৫৪ ৮৩ ০০</a>
                         </div>
                     </div>
                     <div
-                        class="flex items-center gap-4 bg-white/10 p-3 sm:p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all cursor-pointer"
+                        class="flex items-center gap-3 bg-white/10 p-2 sm:p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all cursor-pointer"
                     >
                         <div class="bg-yellow-400 p-3 rounded-full shadow-lg">
                             <i
@@ -306,16 +299,12 @@
                             >
                                 শাহজাহান আলী
                             </p>
-                            <p
-                                class="text-lg sm:text-xl font-black tracking-wide"
-                            >
-                                ০১৭৪০-৫৪ ৮৩ ০১
-                            </p>
+                            <a href="tel:01740548301" class="text-lg sm:text-xl font-black tracking-wide hover:text-yellow-300 transition-colors block">০১৭৪০-৫৪ ৮৩ ০১</a>
                         </div>
                     </div>
 
                     <div
-                        class="flex items-center gap-4 bg-white/10 p-3 sm:p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all cursor-pointer"
+                        class="flex items-center gap-3 bg-white/10 p-2 sm:p-4 rounded-2xl backdrop-blur-md border border-white/5 hover:bg-white/20 transition-all cursor-pointer"
                     >
                         <div class="bg-yellow-400 p-3 rounded-full shadow-lg">
                             <i
@@ -328,11 +317,7 @@
                             >
                                 নজরুল ইসলাম
                             </p>
-                            <p
-                                class="text-lg sm:text-xl font-black tracking-wide"
-                            >
-                                ০১৭৩০-১২ ৫৩ ৫২
-                            </p>
+                            <a href="tel:01730125352" class="text-lg sm:text-xl font-black tracking-wide hover:text-yellow-300 transition-colors block">০১৭৩০-১২ ৫৩ ৫২</a>
                         </div>
                     </div>
                 </div>
@@ -1076,8 +1061,6 @@
                 s.classList.contains("active")
             );
             if (currentSlideIndex === -1) currentSlideIndex = 0;
-            const totalSlides = slides.length;
-            
             // Clock update
             function updateClock() {
                 const now = new Date();
@@ -1193,16 +1176,73 @@
                 animateProgressBar();
             }
 
+            // Page Visibility API - pause when tab hidden
+            let slideTimer = null;
+            let isPaused = false;
+
+            function scheduleNext() {
+                clearTimeout(slideTimer);
+                if (!isPaused) {
+                    slideTimer = setTimeout(() => {
+                        handleSlideCycle();
+                        scheduleNext();
+                    }, slideDuration);
+                }
+            }
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    isPaused = true;
+                    clearTimeout(slideTimer);
+                } else {
+                    isPaused = false;
+                    animateProgressBar();
+                    scheduleNext();
+                }
+            });
+
+            // Auto-pause on user interaction, resume after 30s
+            let resumeTimer = null;
+            function pauseOnInteraction() {
+                isPaused = true;
+                clearTimeout(slideTimer);
+                clearTimeout(resumeTimer);
+                resumeTimer = setTimeout(() => {
+                    isPaused = false;
+                    animateProgressBar();
+                    scheduleNext();
+                }, 30000);
+            }
+            document.getElementById('slide-dots').addEventListener('click', pauseOnInteraction);
+
+            // Keyboard navigation
+            document.addEventListener('keydown', e => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    pauseOnInteraction();
+                    handleSlideCycle();
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    pauseOnInteraction();
+                    slides[currentSlideIndex].classList.remove('active');
+                    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+                    slides[currentSlideIndex].classList.add('active');
+                    updateDots();
+                    const kc = slides[currentSlideIndex].querySelector('.animate-content');
+                    if (kc) { kc.style.animation = 'none'; kc.offsetHeight; kc.style.animation = null; }
+                    animateProgressBar();
+                } else if (e.key === 'f' || e.key === 'F') {
+                    toggleFullScreen();
+                }
+            });
+
             // initialize
             updateClock();
             setInterval(updateClock, 1000);
 
             // start progress for first slide
             animateProgressBar();
-            // ensure next cycle reverses if intended
 
             // schedule cycles
-            setInterval(handleSlideCycle, slideDuration);
+            scheduleNext();
 
             // Accessibility: allow swipe left/right on small screens to change slides
             let touchStartX = 0;
@@ -1219,6 +1259,7 @@
                     currentSlideIndex =
                         (currentSlideIndex - 1 + slides.length) % slides.length;
                     slides[currentSlideIndex].classList.add("active");
+                    updateDots();
                     const content =
                         slides[currentSlideIndex].querySelector(
                             ".animate-content"
